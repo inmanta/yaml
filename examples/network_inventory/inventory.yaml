@@ -1,0 +1,15 @@
+routers:
+    - name: test1
+      mgmt_ip: 10.0.0.1
+      interfaces:
+        - name: eth0
+          ip: 192.168.2.1/24
+        - name: eth2
+          ip: 192.168.3.1/24
+    - name: test2
+      mgmt_ip: 10.0.0.2
+      interfaces:
+        - name: eth0
+          ip: 192.168.4.1/24
+        - name: eth2
+          ip: 192.168.5.1/24
