@@ -11,7 +11,8 @@ entity Interface:
     string ip
 end
 
-Router.interfaces [0:] -- Interface.router [1]
+# A router can have one or more interfaces but an interface always has one router
+Router.interfaces [1:] -- Interface.router [1]
 
 # Print them out, to show we can load them
 implementation router_print for Router:
