@@ -50,8 +50,10 @@ def test_basics(project: Project) -> None:
 
 def test_readme(project):
 
-    project.compile("""
+    project.compile(
+        """
     import yaml
     yaml_dict_c = yaml::loads(\"""key: value\""")
     yaml_dict_c = {"key":"value"}
-    """)
+    """
+    )
