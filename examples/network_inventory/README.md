@@ -1,6 +1,6 @@
 # Inventory Examples
 
-This example show how to use this module to use a yaml file as an inventory
+This example shows how to use this module to use a yaml file as an inventory
 
 ## Usage
 
