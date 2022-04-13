@@ -5,4 +5,3 @@ flake8-isort>3.0.0
 flake8-copyright
 isort
 black
-PyYAML

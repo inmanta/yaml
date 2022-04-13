@@ -16,7 +16,7 @@ def test_network_inventory(project):
         "Router test1: 10.0.0.1",
         "Router test2: 10.0.0.2",
         "Interface test1.eth0: 192.168.2.1/24",
-        "Interface test1.eth2: 192.168.3.1/24",
+        "Interface test1.eth1: 192.168.3.1/24",
         "Interface test2.eth0: 192.168.4.1/24",
-        "Interface test2.eth2: 192.168.5.1/24",]:
+        "Interface test2.eth1: 192.168.5.1/24",]:
         assert line in project.get_stdout()

@@ -10,9 +10,12 @@ import yaml
 yaml_dict_a = yaml::load("test.yaml")
 
 # This does the same
+# Notice this one uses loads instead of load
+# loads loads from a string instead of a file
+# The string is obtained by using std::source, which reads the file from disk
 yaml_dict_b = yaml::loads(std::source("test.yaml"))
 
-# This load from a string
+# loads loads from a string
 yaml_dict_c = yaml::loads("""key: value""")
 
 ```
