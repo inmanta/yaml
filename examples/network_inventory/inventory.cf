@@ -1,0 +1,50 @@
+import yaml
+
+# These are two entities to load from the yaml inventory
+entity Router:
+    string name
+    string mgmt_ip
+end
+
+entity Interface:
+    string name
+    string ip
+end
+
+# A router can have one or more interfaces but an interface always has one router
+Router.interfaces [1:] -- Interface.router [1]
+
+# Print them out, to show we can load them
+implementation router_print for Router:
+    std::print("Router {{name}}: {{mgmt_ip}}")
+end
+
+implementation interface_print for Interface:
+    std::print("Interface {{router.name}}.{{name}}: {{ip}}")
+end
+
+implement Router using router_print
+implement Interface using interface_print
+
+# First we get the inventory content
+inventory = yaml::load("/inventory.yaml")
+
+# Then we get the routers field
+# and go over every router inside
+for router_dict in inventory["routers"]:
+    # For every router in the inventory, we make an instance
+    router = Router(
+        name = router_dict["name"], # put the correct value from the inventory into the object
+        mgmt_ip = router_dict["mgmt_ip"],
+    )
+    # We get all the interfaces for this router
+    # and go over all of them
+    for interfaces_dict in router_dict["interfaces"]:
+        # For every interface in the inventory, we make an instance
+        Interface(
+            router = router, # Link the router to the interface
+            name = interfaces_dict["name"],
+            ip = interfaces_dict["ip"],
+        )
+    end
+end

@@ -15,12 +15,25 @@
 
     Contact: code@inmanta.com
 """
-from inmanta.plugins import plugin
+import yaml
+from inmanta_plugins.std import get_file_content
+
+from inmanta.plugins import Context, plugin
 
 
 @plugin
-def hello(what: "string") -> "string":
+def load(path: "string", ctx: Context) -> "dict":
     """
-    Say hello to what
+    Parse the yaml found in the file at 'path' into a dictionary
+
+    The path is according to the convention for std::source and std::file
     """
-    return f"hello {what}"
+    return yaml.safe_load(get_file_content(ctx, "files", path))
+
+
+@plugin
+def loads(content: "string") -> "dict":
+    """
+    Parse the yaml found in `content` into a dictionary
+    """
+    return yaml.safe_load(content)

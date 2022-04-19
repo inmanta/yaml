@@ -15,14 +15,44 @@
 
     Contact: code@inmanta.com
 """
+import yaml
 from pytest_inmanta.plugin import Project
 
 
 def test_basics(project: Project) -> None:
+    test_content = {"a": ["a", "b", "c"]}
+    yaml_content = yaml.safe_dump(test_content)
+    project.add_mock_file("files", "test.yaml", yaml_content)
     project.compile(
-        """
+        f"""
             import yaml
+            import unittest
+
+            a = yaml::load("unittest/test.yaml")
+            b = yaml::loads(\"""{yaml_content}\""")
+
+            entity Out:
+                dict a
+                dict b
+            end
+
+            Out(a=a, b=b)
+
+            implement Out using std::none
         """
     )
 
-    assert project.get_stdout() == "hello world\n"
+    instance = project.get_instances("__config__::Out")[0]
+    assert instance.a == test_content
+    assert instance.b == test_content
+
+
+def test_readme(project):
+
+    project.compile(
+        """
+    import yaml
+    yaml_dict_c = yaml::loads(\"""key: value\""")
+    yaml_dict_c = {"key":"value"}
+    """
+    )
