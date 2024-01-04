@@ -1,7 +1,1 @@
-pytest-inmanta
-flake8
-flake8-black
-flake8-isort>3.0.0
-flake8-copyright
-isort
-black
+inmanta-dev-dependencies[module]==2.99.0
