@@ -48,7 +48,6 @@ def test_basics(project: Project) -> None:
 
 
 def test_readme(project):
-
     project.compile(
         """
     import yaml
