@@ -15,6 +15,7 @@
 
     Contact: code@inmanta.com
 """
+
 import yaml
 from pytest_inmanta.plugin import Project
 
