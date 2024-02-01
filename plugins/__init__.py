@@ -15,6 +15,7 @@
 
     Contact: code@inmanta.com
 """
+
 import yaml
 from inmanta_plugins.std import get_file_content
 
